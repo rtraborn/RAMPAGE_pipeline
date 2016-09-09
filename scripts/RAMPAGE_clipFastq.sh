@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Please enter info below. Test files are added by default ###
-fastqDir=/scratch/rtraborn/RAMPAGE_pipeline/test/sample_fastq/
+fastqDir=../test/sample_fastq/
 mySuffix=clipped
 #################
 
