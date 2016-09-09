@@ -1,0 +1,4 @@
+### Commands used to generate the files in this folder
+#### Taking the last 250k reads of each pair
+'tail -n 1000000 GSF-1119_S1_R1_001.fastq > Os_IRBB7_example_R1.fastq'
+'tail -n 1000000 GSF-1119_S1_R2_001.fastq > Os_IRBB7_example_R2.fastq' 
