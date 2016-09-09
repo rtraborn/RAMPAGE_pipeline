@@ -1,24 +1,27 @@
 #!/bin/bash
 
-### Enter information here ###
-GENOME=</path/to/fasta/of/genome/assembly>
-GENDIR=</path/to/directory/containing/genome/assembly> 
-FQ_DIR=</path/to/directory/containing/fastq/files>
-#########
+### Please enter information here (test files are entered by default) ###
+GENOME=../test/sample_genome/Osj.fa
+GENDIR=../test/sample_genome/ 
+FQ_DIR=../test/sample_fastq/demultiplexed
+OutFilterScore=0.60
+OutSamType=BAM
+NThreads=8
+############
 
 cd $FQ_DIR
 
 echo "Indexing the genome"
 
-STAR --runMode genomeGenerate --runThreadN 8 --genomeDir $GENDIR --genomeFastaFiles $GENOME
+STAR --runMode genomeGenerate --runThreadN $NThreads --genomeDir $GENDIR --genomeFastaFiles $GENOME
 
 echo "Aligning the RAMPAGE reads to the assembly"
 
-for i in *.fastq; do
+for i in `ls *R1.fastq | cut -d "." -f 1` ; do
 
 echo $i 
     
-STAR --runMode alignReads --runThreadN 8 --genomeDir $GENDIR --outFilterType Normal --readFilesIn ${i} ${i} --readMatesLengthsIn NotEqual --alignMatesGapMax 1000 --sjdbOverhang 39 --outFilterMultimapNmax 20 --outFilterMismatchNmax 2 --outFilterScoreMinOverLread 0.60 --outSAMtype BAM SortedByCoordinate --outSAMorder Paired --outFileNamePrefix $FQ_DIR/${i}.
+STAR --runMode alignReads --runThreadN 8 --genomeDir $GENDIR --outFilterType Normal --readFilesIn ${i}.R1.fastq ${i}.R2.fastq --readMatesLengthsIn NotEqual --alignMatesGapMax 1000 --sjdbOverhang 39 --outFilterMultimapNmax 20 --outFilterMismatchNmax 2 --outFilterScoreMinOverLread $OutFilterScore --outSAMtype $OutSamType SortedByCoordinate --outSAMorder Paired --outFileNamePrefix $FQ_DIR/${i}.
 
 done
 

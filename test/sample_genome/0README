@@ -1,0 +1,3 @@
+### Commands used to generate the files in this folder
+
+cp OsjChr1.fa /scratch/rtraborn/RAMPAGE_pipeline/test/sample_genome/
