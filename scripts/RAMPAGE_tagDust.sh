@@ -31,6 +31,11 @@ echo "Moving files into the new tagDust_files/ directory."
 
 mkdir tagDust_files
 
+mkdir tagDust_files/tagDust_removed
+
+mv *.fastq_un_*.fq tagDust_files/tagDust_removed
+
 mv *.tagdust.fastq* tagDust_files
+
 
 echo "Job complete!"

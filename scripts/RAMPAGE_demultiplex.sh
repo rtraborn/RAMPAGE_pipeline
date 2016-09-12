@@ -12,7 +12,7 @@ cd $fastqDir
 
 for myFastq in `ls *R1.fastq | cut -d "." -f 1`; do
 
-    echo $myFastq
+echo $myFastq
 
 fastq-multx -m $nMismatch -B $barcodes -b $myFastq.R1.fastq $myFastq.R2.fastq -o ${myFastq}.R1.%.fastq ${myFastq}.R2.%.fastq
 
